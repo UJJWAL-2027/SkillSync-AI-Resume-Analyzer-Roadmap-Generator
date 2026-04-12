@@ -1,0 +1,31 @@
+{
+  "name": "skillsync-ai-resume-analyzer-roadmap-generator",
+  "version": "1.0.0",
+  "description": "\"# SkillSync AI Resume Analyzer & Roadmap Generator\"",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/UJJWAL-2027/SkillSync-AI-Resume-Analyzer-Roadmap-Generator.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/UJJWAL-2027/SkillSync-AI-Resume-Analyzer-Roadmap-Generator/issues"
+  },
+  "homepage": "https://github.com/UJJWAL-2027/SkillSync-AI-Resume-Analyzer-Roadmap-Generator#readme",
+  "dependencies": {
+    "axios": "^1.15.0",
+    "react-router-dom": "^7.14.0",
+    "recharts": "^3.8.1"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.27",
+    "postcss": "^8.5.9",
+    "tailwindcss": "^4.2.2"
+  }
+}
