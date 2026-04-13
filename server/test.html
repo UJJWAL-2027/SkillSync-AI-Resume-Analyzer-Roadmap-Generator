@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Resume Upload Test</title>
+</head>
+<body>
+
+  <h2>Upload Resume</h2>
+
+  <form action="http://localhost:5000/api/resume/upload" method="POST" enctype="multipart/form-data">
+    
+    <input type="file" name="resume" accept=".pdf" required />
+    
+    <br><br>
+    
+
+<select name="role">
+  <option value="SDE">SDE</option>
+  <option value="AIML">AI/ML</option>
+  <option value="DEVOPS">DevOps</option>
+  <option value="DATASCIENCE">Data Science</option>
+</select>
+
+    <button type="submit">Upload</button>
+
+  </form>
+
+</body>
+</html>
+
