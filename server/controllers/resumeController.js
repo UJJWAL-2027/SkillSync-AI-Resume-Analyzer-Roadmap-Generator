@@ -17,6 +17,14 @@ exports.uploadResume = async (req, res) => {
       });
     }
 
+    // ✅ File type validation
+    if (req.file.mimetype !== "application/pdf") {
+      return res.status(400).json({
+        success: false,
+        message: "Only PDF files are allowed",
+      });
+    }
+
     // ✅ Role validation
     const role = req.body.role;
     if (!role || !validRoles.includes(role)) {
@@ -25,6 +33,9 @@ exports.uploadResume = async (req, res) => {
         message: "Invalid or missing role",
       });
     }
+
+    // 🔍 Logging (interview bonus)
+    console.log("📌 Role:", role);
 
     // ✅ Extract text from PDF
     const data = await pdf(req.file.buffer);
@@ -41,20 +52,22 @@ exports.uploadResume = async (req, res) => {
     // ✅ Extract skills
     const skills = extractSkills(rawText);
 
-    // ✅ Handle case: no skills found
+    console.log("🧠 Extracted Skills:", skills);
+
+    // ✅ Handle no skills case
     if (!skills || skills.length === 0) {
       return res.status(200).json({
         success: true,
         data: {
           role,
-          level, 
+          level: "Beginner",
           extractedSkills: [],
           score: 0,
           matchedSkills: [],
           missingSkills: [],
           roadmap: [],
           feedback: [
-            "No relevant skills detected. Try improving your resume with technical skills.",
+            "No relevant skills detected. Add technical skills to your resume.",
           ],
         },
       });
@@ -62,10 +75,14 @@ exports.uploadResume = async (req, res) => {
 
     // ✅ Analyze skills
     const analysis = analyzeSkills(skills, role);
-    let level = "Beginner";
 
-if (analysis.score > 70) level = "Advanced";
-else if (analysis.score > 40) level = "Intermediate";
+    console.log("📊 Score:", analysis.score);
+    console.log("❗ Missing Skills:", analysis.missingSkills);
+
+    // ✅ Confidence level
+    let level = "Beginner";
+    if (analysis.score > 70) level = "Advanced";
+    else if (analysis.score > 40) level = "Intermediate";
 
     // ✅ Generate roadmap
     const roadmap = generateRoadmap(analysis.missingSkills);
@@ -78,6 +95,7 @@ else if (analysis.score > 40) level = "Intermediate";
       success: true,
       data: {
         role,
+        level,
         extractedSkills: skills,
         score: analysis.score,
         matchedSkills: analysis.matchedSkills,
@@ -88,7 +106,7 @@ else if (analysis.score > 40) level = "Intermediate";
     });
 
   } catch (error) {
-    console.error("ERROR:", error);
+    console.error("❌ ERROR:", error);
 
     res.status(500).json({
       success: false,
