@@ -1,3 +1,7 @@
+// 🔥 Priority order (important skills first)
+const priority = ["node", "express", "mongodb", "sql", "git"];
+
+// 📦 Roadmap data
 const roadmapData = {
   mongodb: {
     title: "Master MongoDB Basics",
@@ -18,6 +22,20 @@ const roadmapData = {
     topics: ["git basics", "branching", "merging"],
     resource: "freeCodeCamp Git Course",
     goal: "Push and manage projects on GitHub",
+  },
+
+  node: {
+    title: "Backend Development with Node.js",
+    topics: ["Express basics", "REST APIs", "Middleware"],
+    resource: "Node.js Docs + freeCodeCamp",
+    goal: "Build REST APIs using Node.js",
+  },
+
+  express: {
+    title: "Master Express.js",
+    topics: ["Routing", "Middleware", "API structure"],
+    resource: "Express Docs + YouTube (Net Ninja)",
+    goal: "Build scalable backend APIs",
   },
 
   "machine learning": {
@@ -52,12 +70,48 @@ const roadmapData = {
 exports.generateRoadmap = (missingSkills = []) => {
   const roadmap = [];
 
-  missingSkills.forEach((skill, index) => {
+  // 🔥 Sort skills by priority
+  missingSkills.sort((a, b) => {
+    const indexA = priority.indexOf(a.toLowerCase());
+    const indexB = priority.indexOf(b.toLowerCase());
+
+    return (indexA === -1 ? 999 : indexA) - (indexB === -1 ? 999 : indexB);
+  });
+
+  let week = 1;
+
+  // 🔥 GROUPING: Node + Express together
+  const hasNode = missingSkills.includes("node");
+  const hasExpress = missingSkills.includes("express");
+
+  if (hasNode && hasExpress) {
+    roadmap.push({
+      week: week++,
+      skill: "node + express",
+      title: "Backend Development with Node.js & Express",
+      topics: [
+        "Node.js fundamentals",
+        "Express routing",
+        "Middleware",
+        "REST APIs",
+      ],
+      resource: "Node.js Docs + Express Docs + freeCodeCamp",
+      goal: "Build a complete backend API with Node.js and Express",
+    });
+
+    // Remove them so they are not added again
+    missingSkills = missingSkills.filter(
+      (skill) => skill !== "node" && skill !== "express"
+    );
+  }
+
+  // 🔥 Add remaining skills
+  missingSkills.forEach((skill) => {
     const key = skill.toLowerCase();
     const data = roadmapData[key];
 
     roadmap.push({
-      week: index + 1,
+      week: week++,
       skill,
       title: data?.title || `Learn ${skill}`,
       topics: data?.topics || [`Basics of ${skill}`],
