@@ -18,7 +18,7 @@ exports.uploadResume = async (req, res) => {
     }
 
     // ✅ File type validation
-    if (req.file.mimetype !== "application/pdf") {
+    if (req.file.mimetype !== "application/pdf" && !req.file.originalname.toLowerCase().endsWith(".pdf")) {
       return res.status(400).json({
         success: false,
         message: "Only PDF files are allowed",

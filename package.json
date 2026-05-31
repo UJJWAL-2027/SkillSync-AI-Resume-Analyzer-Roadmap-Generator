@@ -20,7 +20,7 @@
   "homepage": "https://github.com/UJJWAL-2027/SkillSync-AI-Resume-Analyzer-Roadmap-Generator#readme",
   "dependencies": {
     "axios": "^1.15.0",
-    "react-router-dom": "^7.14.0",
+    "react-router-dom": "^7.15.1",
     "recharts": "^3.8.1"
   },
   "devDependencies": {

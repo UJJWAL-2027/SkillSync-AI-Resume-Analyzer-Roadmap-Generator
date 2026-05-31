@@ -6,7 +6,7 @@ const storage = multer.memoryStorage();
 const upload = multer({
   storage,
   fileFilter: (req, file, cb) => {
-    if (file.mimetype === "application/pdf") {
+    if (file.mimetype === "application/pdf" || file.originalname.toLowerCase().endsWith(".pdf")) {
       cb(null, true);
     } else {
       cb(new Error("Only PDF files allowed"), false);
