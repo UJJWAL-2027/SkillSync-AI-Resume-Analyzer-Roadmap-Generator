@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Sparkles, LayoutDashboard } from "lucide-react";
 import { motion } from "framer-motion";
 
 // Subcomponents
-import DashboardHero from "@/components/dashboard/DashboardHero";
-import QuickMetrics from "@/components/dashboard/QuickMetrics";
-import SkillBreakdown from "@/components/dashboard/SkillBreakdown";
-import PrioritySkills from "@/components/dashboard/PrioritySkills";
-import StrengthsSection from "@/components/dashboard/StrengthsSection";
+import DetectedSkills from "@/components/skill-analysis/DetectedSkills";
+import MissingSkills from "@/components/skill-analysis/MissingSkills";
+import CoverageSection from "@/components/skill-analysis/CoverageSection";
+import GapAnalysis from "@/components/skill-analysis/GapAnalysis";
+import PriorityLearningAreas from "@/components/skill-analysis/PriorityLearningAreas";
 
-export default function DashboardPage() {
+export default function SkillAnalysisPage() {
   const navigate = useNavigate();
   const [analysisData, setAnalysisData] = useState(null);
   const [isChecking, setIsChecking] = useState(true);
@@ -33,10 +32,13 @@ export default function DashboardPage() {
   if (isChecking || !analysisData) {
     return (
       <div className="min-h-screen bg-[#0B1120] flex items-center justify-center">
-        <div className="text-slate-400 animate-pulse text-lg">Loading Dashboard...</div>
+        <div className="text-slate-400 animate-pulse text-lg">Loading Analysis...</div>
       </div>
     );
   }
+
+  const { matchedSkills = [], missingSkills = [], roadmap = [] } = analysisData;
+  const totalSkills = matchedSkills.length + missingSkills.length;
 
   return (
     <div className="min-h-screen bg-[#0B1120] relative flex flex-col font-sans text-slate-200 selection:bg-indigo-500/30 overflow-x-hidden pb-24">
@@ -60,12 +62,14 @@ export default function DashboardPage() {
 
           {/* Progress Navigation */}
           <nav className="hidden md:flex items-center gap-3 text-sm font-medium">
+            <Link to="/dashboard" className="text-slate-500 px-3 py-1 hover:text-slate-300 transition-colors">
+              Dashboard
+            </Link>
+            <span className="text-slate-600">→</span>
             <div className="flex items-center gap-2 px-4 py-1.5 rounded-full bg-purple-500/10 text-purple-300 border border-purple-500/30 shadow-[0_0_15px_rgba(168,85,247,0.25)]">
               <span className="w-1.5 h-1.5 rounded-full bg-purple-400 animate-pulse" />
-              Dashboard
+              Skill Analysis
             </div>
-            <span className="text-slate-600">→</span>
-            <Link to="/skill-analysis" className="text-slate-500 px-3 py-1 hover:text-slate-300 transition-colors">Skill Analysis</Link>
             <span className="text-slate-600">→</span>
             <span className="text-slate-500 px-3 py-1 cursor-not-allowed">Roadmap</span>
             <span className="text-slate-600">→</span>
@@ -74,41 +78,56 @@ export default function DashboardPage() {
         </div>
       </header>
 
-      {/* Main Dashboard Section */}
+      {/* Main Content */}
       <main className="relative z-10 w-full max-w-7xl mx-auto px-6 pt-32 flex flex-col gap-12">
-        {/* Title Block */}
+        {/* Sections 1 & 2: Detected vs Missing Skills Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <DetectedSkills matchedSkills={matchedSkills} totalSkills={totalSkills} />
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <MissingSkills missingSkills={missingSkills} />
+          </motion.div>
+        </div>
+
+        {/* Section 3: Job Description Coverage */}
         <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-40px" }}
           transition={{ duration: 0.6 }}
-          className="flex flex-col gap-3"
         >
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-semibold w-fit uppercase tracking-wider">
-            <LayoutDashboard className="w-3.5 h-3.5" />
-            Workspace
-          </div>
-          <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-white leading-tight">
-            Resume Analysis Dashboard
-          </h1>
-          <p className="text-base md:text-lg text-slate-400 max-w-3xl leading-relaxed">
-            Track your readiness, identify skill gaps, and accelerate your path toward your target role.
-          </p>
+          <CoverageSection matchedSkills={matchedSkills} missingSkills={missingSkills} />
         </motion.div>
 
-        {/* 1. Hero Card */}
-        <DashboardHero analysis={analysisData} />
+        {/* Section 4: Gap Analysis */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-40px" }}
+          transition={{ duration: 0.6 }}
+        >
+          <GapAnalysis matchedSkills={matchedSkills} missingSkills={missingSkills} />
+        </motion.div>
 
-        {/* 2. Quick Metrics Grid */}
-        <QuickMetrics analysis={analysisData} />
-
-        {/* 3. Skill Breakdown (Bar Chart) */}
-        <SkillBreakdown analysis={analysisData} />
-
-        {/* 4. Priority Skills To Learn */}
-        <PrioritySkills analysis={analysisData} />
-
-        {/* 5. Strongest Areas */}
-        <StrengthsSection analysis={analysisData} />
+        {/* Section 5: Priority Learning Areas */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-40px" }}
+          transition={{ duration: 0.6 }}
+        >
+          <PriorityLearningAreas roadmap={roadmap} />
+        </motion.div>
       </main>
     </div>
   );
