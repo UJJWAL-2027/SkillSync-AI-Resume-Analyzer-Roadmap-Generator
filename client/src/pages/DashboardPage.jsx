@@ -67,7 +67,7 @@ export default function DashboardPage() {
             <span className="text-slate-600">→</span>
             <Link to="/skill-analysis" className="text-slate-500 px-3 py-1 hover:text-slate-300 transition-colors">Skill Analysis</Link>
             <span className="text-slate-600">→</span>
-            <span className="text-slate-500 px-3 py-1 cursor-not-allowed">Roadmap</span>
+            <Link to="/roadmap" className="text-slate-500 px-3 py-1 hover:text-slate-300 transition-colors">Roadmap</Link>
             <span className="text-slate-600">→</span>
             <span className="text-slate-500 px-3 py-1 cursor-not-allowed">Feedback</span>
           </nav>

@@ -3,6 +3,7 @@ import Landing from "./pages/Landing";
 import UploadPage from "./pages/UploadPage";
 import DashboardPage from "./pages/DashboardPage";
 import SkillAnalysisPage from "./pages/SkillAnalysisPage";
+import RoadmapPage from "./pages/RoadmapPage";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Route path="/upload" element={<UploadPage />} />
         <Route path="/dashboard" element={<DashboardPage />} />
         <Route path="/skill-analysis" element={<SkillAnalysisPage />} />
+        <Route path="/roadmap" element={<RoadmapPage />} />
       </Routes>
     </Router>
   );
