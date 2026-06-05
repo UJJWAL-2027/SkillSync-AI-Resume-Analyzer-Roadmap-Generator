@@ -5,6 +5,8 @@ import RoadmapReasons from "../components/roadmap/RoadmapReasons";
 import LearningTimeline from "../components/roadmap/LearningTimeline";
 import LearningModules from "../components/roadmap/LearningModules";
 import RecommendedResources from "../components/roadmap/RecommendedResources";
+import ProgressTracker from "../components/roadmap/ProgressTracker";
+import CareerReadinessPath from "../components/roadmap/CareerReadinessPath";
 
 export default function RoadmapPage() {
   const navigate = useNavigate();
@@ -72,6 +74,8 @@ export default function RoadmapPage() {
           <LearningTimeline analysisData={analysisData} />
           <LearningModules analysisData={analysisData} />
           <RecommendedResources analysisData={analysisData} />
+          <ProgressTracker analysisData={analysisData} />
+          <CareerReadinessPath analysisData={analysisData} />
         </main>
       </div>
     </div>
