@@ -1,21 +1,35 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import Navbar from "@/components/Navbar";
+import Hero from "@/components/Hero";
+import HowItWorks from "@/components/HowItWorks";
+import Features from "@/components/Features";
+import ReadinessScore from "@/components/ReadinessScore";
+import RoadmapPreview from "@/components/RoadmapPreview";
+import CTASection from "@/components/CTASection";
+import Footer from "@/components/Footer";
 
 export default function Landing() {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen text-center p-6 bg-slate-50 dark:bg-slate-950">
-      <h1 className="text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white mb-6">
-        Welcome to SkillSync AI
-      </h1>
-      <p className="text-xl text-slate-600 dark:text-slate-400 mb-10 max-w-2xl">
-        Analyze your resume against your dream role and get a personalized roadmap to land your next job.
-      </p>
-      <Link 
-        to="/upload" 
-        className="px-8 py-4 bg-gradient-to-r from-purple-600 to-blue-600 text-white font-semibold rounded-xl hover:from-purple-700 hover:to-blue-700 transition shadow-lg hover:scale-105"
-      >
-        Get Started
-      </Link>
+    <div className="min-h-screen bg-[#0A0E1A] text-slate-200 font-sans selection:bg-purple-500/30 overflow-x-hidden relative">
+      {/* Background ambient orbs */}
+      <div className="fixed inset-0 z-0 pointer-events-none">
+        <div className="absolute top-[-20%] left-[-10%] w-[600px] h-[600px] rounded-full bg-indigo-600/8 blur-[120px]" />
+        <div className="absolute top-[40%] right-[-10%] w-[500px] h-[500px] rounded-full bg-purple-600/8 blur-[120px]" />
+        <div className="absolute bottom-[-20%] left-[20%] w-[700px] h-[700px] rounded-full bg-sky-600/5 blur-[120px]" />
+        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.15] mix-blend-overlay" />
+      </div>
+
+      {/* Content */}
+      <div className="relative z-10">
+        <Navbar />
+        <Hero />
+        <HowItWorks />
+        <Features />
+        <ReadinessScore />
+        <RoadmapPreview />
+        <CTASection />
+        <Footer />
+      </div>
     </div>
   );
 }

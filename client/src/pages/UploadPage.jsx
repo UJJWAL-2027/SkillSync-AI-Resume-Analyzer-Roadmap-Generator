@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { Upload, Sparkles, Zap, Shield, ChevronRight } from "lucide-react";
-import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
+import { Sparkles, Zap, Shield, ChevronRight, CheckCircle2 } from "lucide-react";
 // eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -9,12 +8,16 @@ import { Button } from "@/components/ui/button";
 import { UploadCard } from "@/components/UploadCard";
 import { RoleSelector } from "@/components/RoleSelector";
 import { LoadingOverlay } from "@/components/LoadingOverlay";
+import api from "@/services/api";
 
 export default function UploadPage() {
+  const navigate = useNavigate();
   const [file, setFile] = useState(null);
   const [role, setRole] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState(false);
+  const [analysisData, setAnalysisData] = useState(null);
 
   const handleAnalyze = async () => {
     if (!file || !role) {
@@ -24,23 +27,28 @@ export default function UploadPage() {
 
     setIsLoading(true);
     setError("");
+    setSuccess(false);
+    setAnalysisData(null);
 
     const formData = new FormData();
     formData.append("resume", file);
     formData.append("role", role);
 
     try {
-      const response = await axios.post("http://localhost:5000/api/resume/upload", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
+      const response = await api.post("/resume/upload", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
       });
 
       console.log("Analysis Result:", response.data);
-      alert("Analysis successful! Check console for data.");
+      localStorage.setItem("analysisResult", JSON.stringify(response.data.data));
+      setAnalysisData(response.data);
+      setSuccess(true);
+      navigate("/dashboard");
     } catch (err) {
       console.error("Upload error:", err);
-      setError(err.response?.data?.message || "Failed to analyze resume. Please try again.");
+      setError(
+        err.message || "Failed to analyze resume. Please try again."
+      );
     } finally {
       setIsLoading(false);
     }
@@ -143,10 +151,30 @@ export default function UploadPage() {
                   <RoleSelector value={role} onChange={setRole} />
 
                   <AnimatePresence>
-                    {error && (
-                      <motion.div 
+                    {success && (
+                      <motion.div
+                        key="success"
                         initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: 'auto' }}
+                        animate={{ opacity: 1, height: "auto" }}
+                        exit={{ opacity: 0, height: 0 }}
+                        className="overflow-hidden"
+                      >
+                        <div className="p-3 mt-1 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-sm text-emerald-400 flex items-start gap-2">
+                          <CheckCircle2 className="w-4 h-4 mt-0.5 shrink-0" />
+                          <div>
+                            <p className="font-semibold">Analysis complete!</p>
+                            {analysisData?.role && (
+                              <p className="mt-0.5 text-emerald-300/80">Role: {analysisData.role}</p>
+                            )}
+                          </div>
+                        </div>
+                      </motion.div>
+                    )}
+                    {error && (
+                      <motion.div
+                        key="error"
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: "auto" }}
                         exit={{ opacity: 0, height: 0 }}
                         className="overflow-hidden"
                       >
