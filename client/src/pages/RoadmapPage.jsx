@@ -64,7 +64,7 @@ export default function RoadmapPage() {
               Roadmap
             </div>
             <span className="text-slate-600">→</span>
-            <span className="text-slate-500 px-3 py-1 cursor-not-allowed">Feedback</span>
+            <Link to="/feedback" className="text-slate-500 px-3 py-1 hover:text-slate-300 transition-colors">Feedback</Link>
           </nav>
         </header>
 

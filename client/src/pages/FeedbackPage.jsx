@@ -1,16 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Sparkles, LayoutDashboard } from "lucide-react";
 import { motion } from "framer-motion";
 
 // Subcomponents
-import DashboardHero from "@/components/dashboard/DashboardHero";
-import QuickMetrics from "@/components/dashboard/QuickMetrics";
-import SkillBreakdown from "@/components/dashboard/SkillBreakdown";
-import PrioritySkills from "@/components/dashboard/PrioritySkills";
-import StrengthsSection from "@/components/dashboard/StrengthsSection";
+import PriorityImprovements from "@/components/feedback/PriorityImprovements";
+import KeywordAnalysis from "@/components/feedback/KeywordAnalysis";
+import ATSChecklist from "@/components/feedback/ATSChecklist";
 
-export default function DashboardPage() {
+export default function FeedbackPage() {
   const navigate = useNavigate();
   const [analysisData, setAnalysisData] = useState(null);
   const [isChecking, setIsChecking] = useState(true);
@@ -21,7 +18,8 @@ export default function DashboardPage() {
       navigate("/upload");
     } else {
       try {
-        setAnalysisData(JSON.parse(stored));
+        const parsed = JSON.parse(stored);
+        setAnalysisData(parsed.analysis ? parsed.analysis : parsed);
       } catch (e) {
         console.error("Failed to parse analysisResult", e);
         navigate("/upload");
@@ -33,10 +31,13 @@ export default function DashboardPage() {
   if (isChecking || !analysisData) {
     return (
       <div className="min-h-screen bg-[#0B1120] flex items-center justify-center">
-        <div className="text-slate-400 animate-pulse text-lg">Loading Dashboard...</div>
+        <div className="text-slate-400 animate-pulse text-lg">Loading Feedback...</div>
       </div>
     );
   }
+
+  // Use the new dynamically generated fields from backend
+  const { priorityImprovements = [], keywordAnalysis = {}, atsChecklist = [] } = analysisData;
 
   return (
     <div className="min-h-screen bg-[#0B1120] relative flex flex-col font-sans text-slate-200 selection:bg-indigo-500/30 overflow-x-hidden pb-24">
@@ -60,55 +61,74 @@ export default function DashboardPage() {
 
           {/* Progress Navigation */}
           <nav className="hidden md:flex items-center gap-3 text-sm font-medium">
+            <Link to="/dashboard" className="text-slate-500 px-3 py-1 hover:text-slate-300 transition-colors">
+              Dashboard
+            </Link>
+            <span className="text-slate-600">→</span>
+            <Link to="/skill-analysis" className="text-slate-500 px-3 py-1 hover:text-slate-300 transition-colors">
+              Skill Analysis
+            </Link>
+            <span className="text-slate-600">→</span>
+            <Link to="/roadmap" className="text-slate-500 px-3 py-1 hover:text-slate-300 transition-colors">
+              Roadmap
+            </Link>
+            <span className="text-slate-600">→</span>
             <div className="flex items-center gap-2 px-4 py-1.5 rounded-full bg-purple-500/10 text-purple-300 border border-purple-500/30 shadow-[0_0_15px_rgba(168,85,247,0.25)]">
               <span className="w-1.5 h-1.5 rounded-full bg-purple-400 animate-pulse" />
-              Dashboard
+              Feedback
             </div>
-            <span className="text-slate-600">→</span>
-            <Link to="/skill-analysis" className="text-slate-500 px-3 py-1 hover:text-slate-300 transition-colors">Skill Analysis</Link>
-            <span className="text-slate-600">→</span>
-            <Link to="/roadmap" className="text-slate-500 px-3 py-1 hover:text-slate-300 transition-colors">Roadmap</Link>
-            <span className="text-slate-600">→</span>
-            <Link to="/feedback" className="text-slate-500 px-3 py-1 hover:text-slate-300 transition-colors">Feedback</Link>
           </nav>
         </div>
       </header>
 
-      {/* Main Dashboard Section */}
+      {/* Main Content */}
       <main className="relative z-10 w-full max-w-7xl mx-auto px-6 pt-32 flex flex-col gap-12">
-        {/* Title Block */}
+        
+        {/* Page Title Section */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           className="flex flex-col gap-3"
         >
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-semibold w-fit uppercase tracking-wider">
-            <LayoutDashboard className="w-3.5 h-3.5" />
-            Workspace
-          </div>
           <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-white leading-tight">
-            Resume Analysis Dashboard
+            Resume Feedback
           </h1>
           <p className="text-base md:text-lg text-slate-400 max-w-3xl leading-relaxed">
-            Track your readiness, identify skill gaps, and accelerate your path toward your target role.
+            Detailed analysis and actionable insights to improve your resume and career prospects
           </p>
         </motion.div>
 
-        {/* 1. Hero Card */}
-        <DashboardHero analysis={analysisData} />
+        {/* Section 2: Priority Improvements */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-40px" }}
+          transition={{ duration: 0.6 }}
+        >
+          <PriorityImprovements improvements={priorityImprovements} />
+        </motion.div>
 
-        {/* 2. Quick Metrics Grid */}
-        <QuickMetrics analysis={analysisData} />
+        {/* Section 3: Keyword Analysis */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-40px" }}
+          transition={{ duration: 0.6 }}
+        >
+          <KeywordAnalysis keywordAnalysis={keywordAnalysis} />
+        </motion.div>
 
-        {/* 3. Skill Breakdown (Bar Chart) */}
-        <SkillBreakdown analysis={analysisData} />
+        {/* Section 4: ATS Checklist */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-40px" }}
+          transition={{ duration: 0.6 }}
+        >
+          <ATSChecklist checklist={atsChecklist} />
+        </motion.div>
 
-        {/* 4. Priority Skills To Learn */}
-        <PrioritySkills analysis={analysisData} />
-
-        {/* 5. Strongest Areas */}
-        <StrengthsSection analysis={analysisData} />
       </main>
     </div>
   );
