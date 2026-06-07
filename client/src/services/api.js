@@ -1,10 +1,11 @@
 import axios from "axios";
+import { API_URL } from "../config/api";
 
 // ---------------------------------------------------------------------------
 // Axios instance
 // ---------------------------------------------------------------------------
 const api = axios.create({
-  baseURL: "http://localhost:5000/api",
+  baseURL: `${API_URL}/api`,
   timeout: 30000, // 30 s — generous for file-upload + AI processing
   headers: {
     "Content-Type": "application/json",
