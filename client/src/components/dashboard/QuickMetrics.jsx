@@ -78,13 +78,12 @@ export default function QuickMetrics({ analysis }) {
             <motion.div
               key={idx}
               variants={item}
-              whileHover={{ y: -6, transition: { duration: 0.2 } }}
-              className="relative group cursor-default"
+              className="relative group cursor-default transition-all duration-300 hover:-translate-y-1"
             >
               {/* Card Hover Glow effect */}
-              <div className="absolute -inset-0.5 bg-gradient-to-r from-indigo-500/5 to-purple-500/5 rounded-2xl blur opacity-0 group-hover:opacity-100 transition duration-500 pointer-events-none" />
+              <div className="absolute -inset-0.5 bg-gradient-to-r from-purple-500/5 to-indigo-500/5 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition duration-500 pointer-events-none" />
 
-              <div className="relative p-6 bg-[#0F172A]/70 backdrop-blur-xl border border-white/10 rounded-2xl flex items-center justify-between shadow-[0_4px_20px_rgba(0,0,0,0.2)] hover:border-indigo-500/30 transition-all duration-300">
+              <div className="relative p-6 bg-[#0F172A]/70 backdrop-blur-xl border border-white/10 rounded-2xl flex items-center justify-between shadow-[0_8px_30px_rgba(0,0,0,0.12)] hover:border-purple-500/30 hover:shadow-[0_8px_30px_rgba(168,85,247,0.15)] transition-all duration-300">
                 <div className="flex flex-col gap-2">
                   <span className="text-sm font-medium text-slate-400">
                     {m.title}

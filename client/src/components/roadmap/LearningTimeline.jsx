@@ -37,10 +37,13 @@ export default function LearningTimeline({ analysisData }) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: idx * 0.1 }}
-              className="group p-5 md:p-6 bg-[#0F172A]/70 backdrop-blur-xl border border-white/10 rounded-2xl flex items-center justify-between hover:border-purple-500/30 transition-all duration-300 shadow-[0_4px_20px_rgba(0,0,0,0.1)] cursor-pointer"
+              className="relative group p-5 md:p-6 bg-[#0F172A]/70 backdrop-blur-xl border border-white/10 rounded-2xl flex items-center justify-between hover:border-purple-500/30 hover:shadow-[0_8px_30px_rgba(168,85,247,0.15)] transition-all duration-300 hover:-translate-y-1 cursor-pointer overflow-hidden"
             >
-              <div className="flex items-center gap-4 md:gap-6">
-                <div className="w-12 h-12 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center shrink-0">
+              {/* Subtle hover glow */}
+              <div className="absolute inset-0 bg-gradient-to-r from-purple-500/5 to-indigo-500/5 opacity-0 group-hover:opacity-100 transition duration-500 pointer-events-none" />
+              
+              <div className="relative z-10 flex items-center gap-4 md:gap-6">
+                <div className="w-12 h-12 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center shrink-0 group-hover:bg-purple-500/20 group-hover:border-purple-500/40 transition-all duration-300">
                   <span className="text-purple-400 font-bold text-sm">W{item.week || idx + 1}</span>
                 </div>
                 <div className="flex flex-col">

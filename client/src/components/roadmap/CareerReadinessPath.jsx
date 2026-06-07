@@ -54,10 +54,10 @@ export default function CareerReadinessPath({ analysisData }) {
                 {!isLast && (
                   <div className="absolute left-[19px] top-10 bottom-[-10px] w-px bg-slate-800">
                      {isCompleted && (
-                       <div className="absolute top-0 w-full bg-[#4C1D95]" style={{ height: '100%' }} />
+                       <div className="absolute top-0 w-full bg-[#4C1D95] shadow-[0_0_10px_rgba(168,85,247,0.5)]" style={{ height: '100%' }} />
                      )}
                      {isActive && (
-                       <div className="absolute top-0 w-full bg-gradient-to-b from-[#4C1D95] to-transparent" style={{ height: '50%' }} />
+                       <div className="absolute top-0 w-full bg-gradient-to-b from-[#4C1D95] to-transparent shadow-[0_0_10px_rgba(168,85,247,0.5)]" style={{ height: '50%' }} />
                      )}
                   </div>
                 )}

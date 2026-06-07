@@ -93,7 +93,7 @@ export default function MissingSkills({ missingSkills }) {
             <motion.div
               key={idx}
               variants={item}
-              className="px-5 py-4 bg-amber-500/5 border border-amber-500/20 hover:border-amber-500/40 rounded-xl flex flex-col gap-3 transition-colors"
+              className="px-5 py-4 bg-amber-500/5 border border-amber-500/20 hover:border-amber-500/50 hover:bg-amber-500/10 hover:shadow-[0_4px_20px_rgba(251,191,36,0.15)] rounded-xl flex flex-col gap-3 transition-all duration-300"
             >
               <div className="flex items-center gap-2">
                 <AlertCircle className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />

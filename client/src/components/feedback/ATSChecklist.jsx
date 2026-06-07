@@ -27,7 +27,7 @@ export default function ATSChecklist({ checklist = [] }) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.3, delay: index * 0.05 }}
-            className="relative group bg-[#0F172A]/50 border border-white/5 rounded-xl p-4 flex items-center gap-4 cursor-pointer overflow-hidden transition-all duration-300 ease-in-out hover:scale-[1.02] hover:border-purple-500/50 hover:shadow-[0_0_15px_rgba(168,85,247,0.2)] hover:bg-[#0F172A]/70"
+            className="relative group bg-[#0F172A]/50 border border-white/5 rounded-xl p-4 flex items-center gap-4 cursor-pointer overflow-hidden transition-all duration-300 ease-in-out hover:scale-[1.02] hover:border-purple-500/50 hover:shadow-[0_8px_30px_rgba(168,85,247,0.15)] hover:bg-[#0F172A]/70"
           >
             {/* Subtle background highlight */}
             <div className="absolute inset-0 bg-purple-500/0 group-hover:bg-purple-500/5 transition-colors duration-300 pointer-events-none" />

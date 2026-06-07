@@ -29,7 +29,7 @@ export default function Hero() {
           <div className="flex items-center gap-4 mt-2">
             <Link
               to="/upload"
-              className="inline-flex items-center gap-2 px-7 py-3.5 bg-white text-[#0A0E1A] font-semibold rounded-full hover:bg-slate-100 transition-all duration-200 hover:scale-[1.03] active:scale-[0.98] shadow-lg shadow-white/10 text-[15px]"
+              className="inline-flex items-center gap-2 px-7 py-3.5 bg-white text-[#0A0E1A] font-semibold rounded-full hover:bg-slate-100 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] shadow-[0_0_20px_rgba(255,255,255,0.15)] hover:shadow-[0_0_30px_rgba(255,255,255,0.25)] text-[15px]"
             >
               Analyze My Resume
               <ArrowRight className="w-4 h-4" />
@@ -88,7 +88,7 @@ export default function Hero() {
                       strokeLinecap="round"
                       strokeDasharray={2 * Math.PI * 68}
                       strokeDashoffset={2 * Math.PI * 68 * (1 - 0.82)}
-                      className="transition-all duration-1000"
+                      className="transition-all duration-1000 ease-out"
                     />
                     <defs>
                       <linearGradient id="heroGradient" x1="0%" y1="0%" x2="100%" y2="100%">

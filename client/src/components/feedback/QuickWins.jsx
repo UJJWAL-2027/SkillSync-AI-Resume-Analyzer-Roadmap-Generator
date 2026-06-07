@@ -19,8 +19,8 @@ export default function QuickWins({ wins = [] }) {
         {wins.map((item, index) => {
           const isHigh = item.impact === "High";
           const borderStyle = isHigh
-            ? "border-emerald-500/20 hover:border-emerald-500/50 hover:shadow-[0_0_20px_rgba(16,185,129,0.15)]"
-            : "border-purple-500/20 hover:border-purple-500/50 hover:shadow-[0_0_20px_rgba(168,85,247,0.15)]";
+            ? "border-emerald-500/20 hover:border-emerald-500/50 hover:shadow-[0_8px_30px_rgba(16,185,129,0.15)]"
+            : "border-purple-500/20 hover:border-purple-500/50 hover:shadow-[0_8px_30px_rgba(168,85,247,0.15)]";
           
           return (
             <motion.div

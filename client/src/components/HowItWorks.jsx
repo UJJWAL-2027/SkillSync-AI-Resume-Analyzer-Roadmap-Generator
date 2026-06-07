@@ -65,15 +65,12 @@ export default function HowItWorks() {
             <motion.div
               key={step.num}
               variants={item}
-              className="relative group bg-[#0F172A] border border-purple-500/15 rounded-xl p-8 text-center overflow-hidden hover:border-purple-500/30 transition-all duration-300 hover:shadow-[0_0_30px_rgba(139,92,246,0.08)]"
+              className="relative group bg-[#0F172A]/70 backdrop-blur-xl border border-white/5 rounded-2xl p-6 md:p-8 flex-1 transition-all duration-300 hover:-translate-y-1 hover:border-purple-500/30 hover:shadow-[0_8px_30px_rgba(168,85,247,0.15)] overflow-hidden"
             >
-              {/* Watermark Number */}
-              <span className="absolute top-4 left-1/2 -translate-x-1/2 text-[90px] font-bold text-slate-700/15 leading-none pointer-events-none select-none">
-                {step.num}
-              </span>
+              {/* Subtle hover glow */}
+              <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
-              {/* Icon */}
-              <div className="relative z-10 w-12 h-12 rounded-full bg-purple-500/15 flex items-center justify-center mx-auto mb-5 border border-purple-500/20 group-hover:bg-purple-500/25 transition-colors">
+              <div className="relative z-10 w-12 h-12 rounded-2xl bg-gradient-to-br from-purple-500/20 to-indigo-500/20 border border-white/10 flex items-center justify-center mb-6 text-xl font-bold text-white group-hover:scale-110 group-hover:border-purple-500/40 transition-all duration-300 shadow-[0_0_15px_rgba(168,85,247,0.15)] group-hover:shadow-[0_0_25px_rgba(168,85,247,0.3)]">
                 <step.icon className="w-5 h-5 text-purple-400" />
               </div>
 

@@ -97,8 +97,12 @@ export default function PriorityLearningAreas({ roadmap = [] }) {
             <motion.div
               key={idx}
               variants={item}
-              className="relative p-5 md:p-6 bg-[#162032] border border-white/5 rounded-2xl hover:border-indigo-500/30 transition-all duration-300"
+              className="relative group transition-all duration-300 hover:-translate-y-1"
             >
+              {/* Glow Effect */}
+              <div className="absolute -inset-0.5 bg-gradient-to-r from-purple-500/5 to-indigo-500/5 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition duration-500 pointer-events-none" />
+
+              <div className="relative p-5 md:p-6 bg-[#162032] border border-white/5 rounded-2xl hover:border-indigo-500/30 hover:shadow-[0_8px_30px_rgba(99,102,241,0.15)] transition-all duration-300">
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                 <div className="flex items-center gap-4">
                   <div className={`w-12 h-12 rounded-full ${rankColor} text-white font-bold text-xl flex items-center justify-center shadow-lg shrink-0`}>
@@ -124,6 +128,7 @@ export default function PriorityLearningAreas({ roadmap = [] }) {
                 <div className="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
                   <div className="h-full w-0 bg-indigo-500 rounded-full" />
                 </div>
+              </div>
               </div>
             </motion.div>
           );

@@ -44,7 +44,7 @@ export default function CTASection() {
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <Link
             to="/upload"
-            className="inline-flex items-center gap-2 px-7 py-3.5 bg-white text-[#0A0E1A] font-semibold rounded-full hover:bg-slate-100 transition-all duration-200 hover:scale-[1.03] active:scale-[0.98] shadow-lg shadow-white/10 text-[15px]"
+            className="inline-flex items-center gap-2 px-7 py-3.5 bg-white text-[#0A0E1A] font-semibold rounded-full hover:bg-slate-100 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] shadow-[0_0_20px_rgba(255,255,255,0.15)] hover:shadow-[0_0_30px_rgba(255,255,255,0.25)] text-[15px]"
           >
             Analyze Resume Now
             <ArrowRight className="w-4 h-4" />
@@ -52,7 +52,7 @@ export default function CTASection() {
 
           <button
             onClick={scrollToFeatures}
-            className="inline-flex items-center gap-2 px-7 py-3.5 bg-transparent border border-slate-700 text-slate-300 font-semibold rounded-full hover:border-slate-500 hover:text-white transition-all duration-200 text-[15px] cursor-pointer"
+            className="inline-flex items-center gap-2 px-7 py-3.5 bg-[#1E293B]/60 backdrop-blur-sm border border-white/10 text-white font-semibold rounded-full hover:bg-[#1E293B]/80 hover:border-purple-500/50 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] text-[15px] cursor-pointer"
           >
             View Features
           </button>

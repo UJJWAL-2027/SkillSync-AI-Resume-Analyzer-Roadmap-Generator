@@ -36,7 +36,7 @@ export default function WritingTips({ tips = [] }) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="relative flex flex-col group bg-[#0F172A]/50 border border-white/5 rounded-2xl p-6 cursor-pointer overflow-hidden transition-all duration-300 ease-in-out hover:scale-[1.02] hover:-translate-y-1 hover:border-purple-500/50 hover:shadow-[0_0_20px_rgba(168,85,247,0.25)] hover:bg-[#0F172A]/80"
+              className="relative flex flex-col group bg-[#0F172A]/50 border border-white/5 rounded-2xl p-6 cursor-pointer overflow-hidden transition-all duration-300 ease-in-out hover:scale-[1.02] hover:-translate-y-1 hover:border-purple-500/50 hover:shadow-[0_8px_30px_rgba(168,85,247,0.15)] hover:bg-[#0F172A]/80"
             >
               {/* Left edge accent bar */}
               <div className="absolute left-0 top-0 bottom-0 w-[3px] bg-gradient-to-b from-purple-500/0 via-purple-500/70 to-purple-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-l-2xl" />

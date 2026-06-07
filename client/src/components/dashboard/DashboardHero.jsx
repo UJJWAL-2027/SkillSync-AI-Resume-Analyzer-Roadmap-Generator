@@ -42,7 +42,7 @@ export default function DashboardHero({ analysis }) {
     >
       <div className="relative group">
         {/* Glow behind the hero card */}
-        <div className="absolute -inset-0.5 bg-gradient-to-r from-indigo-500/10 to-purple-500/10 rounded-[2rem] blur-xl opacity-60 pointer-events-none" />
+        <div className="absolute -inset-0.5 bg-gradient-to-r from-purple-500/20 to-indigo-500/20 rounded-[2rem] blur-xl opacity-60 pointer-events-none transition duration-500" />
 
         <div className="relative p-8 md:p-10 bg-[#0F172A]/70 backdrop-blur-xl border border-white/10 rounded-[2rem] shadow-[0_0_40px_rgba(99,102,241,0.05)] grid md:grid-cols-12 gap-8 items-center">
           

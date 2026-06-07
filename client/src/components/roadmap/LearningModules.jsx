@@ -80,7 +80,7 @@ export default function LearningModules({ analysisData }) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: idx * 0.1 }}
-              className={`bg-[#0F172A]/70 backdrop-blur-xl border border-white/10 rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.1)] overflow-hidden transition-all duration-300 ${isExpanded ? 'border-purple-500/40 bg-[#151f32]/90' : 'hover:border-white/20'}`}
+              className={`relative group bg-[#0F172A]/70 backdrop-blur-xl border border-white/10 rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.12)] overflow-hidden transition-all duration-300 hover:border-purple-500/30 hover:shadow-[0_8px_30px_rgba(168,85,247,0.15)] ${isExpanded ? 'border-purple-500/40 bg-[#151f32]/90' : 'hover:-translate-y-1'}`}
             >
               <button
                 onClick={() => toggleAccordion(idx)}
@@ -116,7 +116,7 @@ export default function LearningModules({ analysisData }) {
                     initial={{ height: 0, opacity: 0 }}
                     animate={{ height: "auto", opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
                   >
                     <div className="px-5 md:px-6 pb-6 pt-2 border-t border-white/5">
                       {/* Mobile stats */}

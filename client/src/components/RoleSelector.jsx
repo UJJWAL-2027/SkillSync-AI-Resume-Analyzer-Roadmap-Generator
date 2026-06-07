@@ -23,10 +23,10 @@ export function RoleSelector({ value, onChange }) {
         Target Role
       </label>
       <Select value={value} onValueChange={onChange}>
-        <SelectTrigger className="w-full h-12 rounded-xl bg-white/5 border-white/10 hover:border-indigo-500/50 hover:bg-white/10 transition-all duration-300 focus:ring-2 focus:ring-indigo-500/30 focus:border-indigo-500 text-sm px-4 text-slate-200">
+        <SelectTrigger className="w-full h-12 rounded-xl bg-white/5 border-white/10 hover:border-purple-500/50 hover:bg-white/10 transition-all duration-300 focus:ring-2 focus:ring-purple-500/30 focus:border-purple-500 text-sm px-4 text-slate-200">
           <SelectValue placeholder="Select your dream role" />
         </SelectTrigger>
-        <SelectContent className="rounded-xl border-white/10 bg-[#0F172A]/95 backdrop-blur-xl shadow-xl">
+        <SelectContent className="rounded-xl border-white/10 bg-[#0F172A]/95 backdrop-blur-xl shadow-[0_8px_30px_rgba(0,0,0,0.5)]">
           {ROLES.map((role) => (
             <SelectItem 
               key={role.value} 

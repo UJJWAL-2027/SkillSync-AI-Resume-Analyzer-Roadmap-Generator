@@ -54,7 +54,7 @@ export default function DetectedSkills({ matchedSkills, totalSkills }) {
           <motion.div
             key={idx}
             variants={item}
-            className="px-4 py-3 bg-[#0a1420] border border-[#1e2e42] hover:border-emerald-500/40 rounded-xl flex items-center gap-3 transition-colors"
+            className="px-4 py-3 bg-[#0a1420] border border-[#1e2e42] hover:border-emerald-500/50 hover:bg-emerald-500/5 rounded-xl flex items-center gap-3 transition-colors duration-300"
           >
             <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
             <span className="text-[14px] font-semibold text-slate-100">{skill}</span>

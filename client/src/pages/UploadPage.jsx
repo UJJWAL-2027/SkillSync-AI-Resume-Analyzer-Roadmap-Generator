@@ -189,7 +189,7 @@ export default function UploadPage() {
                   <Button 
                     onClick={handleAnalyze} 
                     disabled={!file || !role || isLoading}
-                    className="w-full h-14 text-base font-semibold rounded-2xl bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-400 hover:to-purple-400 text-white shadow-[0_0_20px_rgba(99,102,241,0.3)] transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 mt-2 flex items-center justify-center gap-2 group/btn"
+                    className="w-full h-14 text-base font-semibold rounded-2xl bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-400 hover:to-purple-400 text-white shadow-[0_0_20px_rgba(99,102,241,0.3)] hover:shadow-[0_0_30px_rgba(99,102,241,0.5)] transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:hover:shadow-[0_0_20px_rgba(99,102,241,0.3)] mt-2 flex items-center justify-center gap-2 group/btn"
                   >
                     {isLoading ? "Analyzing..." : "Analyze Resume"}
                     {!isLoading && <ChevronRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />}

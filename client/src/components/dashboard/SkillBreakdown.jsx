@@ -54,9 +54,9 @@ export default function SkillBreakdown({ analysis }) {
   const CustomTooltip = ({ active, payload }) => {
     if (active && payload && payload.length) {
       return (
-        <div className="bg-[#0F172A] border border-white/10 px-3 py-2 rounded-xl text-xs text-slate-300 shadow-2xl">
+        <div className="bg-[#0F172A]/80 backdrop-blur-md border border-purple-500/20 px-3 py-2 rounded-xl text-xs text-slate-300 shadow-[0_8px_30px_rgba(0,0,0,0.3)]">
           <p className="font-semibold text-white mb-0.5">{payload[0].payload.name}</p>
-          <p className="text-indigo-400">Match Level: <span className="font-bold">{payload[0].value}%</span></p>
+          <p className="text-purple-400">Match Level: <span className="font-bold">{payload[0].value}%</span></p>
         </div>
       );
     }

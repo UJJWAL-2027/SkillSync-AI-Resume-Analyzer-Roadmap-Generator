@@ -77,9 +77,12 @@ export default function Features() {
             <motion.div
               key={f.title}
               variants={item}
-              className="group bg-[#0F172A] border border-purple-500/10 rounded-xl p-6 hover:border-purple-500/25 transition-all duration-300 hover:shadow-[0_0_30px_rgba(139,92,246,0.06)]"
+              className="relative group bg-[#0F172A]/70 backdrop-blur-xl border border-white/5 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:border-purple-500/30 hover:shadow-[0_8px_30px_rgba(168,85,247,0.15)] cursor-default overflow-hidden"
             >
-              <div className="w-10 h-10 rounded-xl bg-purple-500/15 flex items-center justify-center mb-5 border border-purple-500/20 group-hover:bg-purple-500/25 transition-colors">
+              {/* Subtle hover glow */}
+              <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+              
+              <div className="relative z-10 w-10 h-10 rounded-xl bg-purple-500/15 flex items-center justify-center mb-5 border border-purple-500/20 group-hover:bg-purple-500/25 transition-colors duration-300">
                 <f.icon className="w-5 h-5 text-purple-400" />
               </div>
               <h3 className="text-[16px] font-semibold text-white mb-2">{f.title}</h3>

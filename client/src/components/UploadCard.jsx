@@ -57,11 +57,11 @@ export function UploadCard({ file, setFile }) {
   return (
     <div
       className={cn(
-        "relative flex flex-col items-center justify-center w-full p-6 border border-dashed rounded-2xl cursor-pointer transition-all duration-300 group overflow-hidden bg-white/[0.02]",
+        "relative flex flex-col items-center justify-center w-full p-6 border border-dashed rounded-2xl cursor-pointer transition-all duration-300 group overflow-hidden bg-[#0F172A]/40 backdrop-blur-sm",
         isDragActive
-          ? "border-indigo-400 bg-indigo-500/10 shadow-[0_0_30px_rgba(99,102,241,0.2)]"
-          : "border-white/20 hover:border-indigo-500/50 hover:bg-white/[0.04]",
-        file ? "border-solid border-indigo-500/50 bg-indigo-500/5" : ""
+          ? "border-purple-400 bg-purple-500/10 shadow-[0_0_30px_rgba(168,85,247,0.2)]"
+          : "border-white/20 hover:border-purple-500/50 hover:bg-[#0F172A]/70 hover:shadow-[0_8px_30px_rgba(168,85,247,0.15)]",
+        file ? "border-solid border-purple-500/50 bg-purple-500/5 shadow-[0_4px_20px_rgba(168,85,247,0.1)]" : ""
       )}
       onDragEnter={onDragEnter}
       onDragOver={onDragEnter}
