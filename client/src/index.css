@@ -69,7 +69,9 @@
     @apply border-border;
   }
 
-  body {
+  body, html {
     @apply bg-background text-foreground;
+    overflow-x: hidden;
+    word-break: break-word;
   }
 }

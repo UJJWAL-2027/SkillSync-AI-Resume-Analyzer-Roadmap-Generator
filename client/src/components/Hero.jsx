@@ -14,7 +14,7 @@ export default function Hero() {
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           className="flex flex-col gap-6"
         >
-          <h1 className="text-5xl md:text-6xl lg:text-[64px] font-bold tracking-tight leading-[1.08]">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[64px] font-bold tracking-tight leading-[1.08]">
             <span className="text-white">Turn Your{"\n"}Resume Into a </span>
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-violet-400">
               Job-Ready Career Plan
@@ -40,13 +40,13 @@ export default function Hero() {
             <p className="text-sm text-slate-500 mb-2">
               Trusted by thousands of professionals
             </p>
-            <div className="flex items-center gap-6 text-sm text-slate-300">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-6 text-sm text-slate-300">
               <span className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-pink-500" />
+                <span className="w-2 h-2 rounded-full bg-pink-500 shrink-0" />
                 10,000+ Resumes Analyzed
               </span>
               <span className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-indigo-500" />
+                <span className="w-2 h-2 rounded-full bg-indigo-500 shrink-0" />
                 95% Accuracy Rate
               </span>
             </div>

@@ -89,8 +89,8 @@ export default function UploadPage() {
       </header>
 
       {/* Split Hero Layout */}
-      <main id="upload-section" className="flex-1 flex flex-col justify-center items-center p-6 w-full max-w-7xl mx-auto pt-32 pb-20 relative z-10 min-h-screen">
-        <div className="w-full grid lg:grid-cols-2 gap-16 lg:gap-8 items-center">
+      <main id="upload-section" className="flex-1 flex flex-col justify-center items-center px-4 sm:px-6 py-6 w-full max-w-7xl mx-auto pt-32 pb-20 relative z-10 min-h-screen">
+        <div className="w-full grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
           
           {/* LEFT SIDE: Text and Features */}
           <motion.div 
@@ -104,7 +104,7 @@ export default function UploadPage() {
               AI-Powered Analysis
             </div>
             
-            <h1 className="text-5xl md:text-6xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-200 to-slate-400 leading-tight">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-200 to-slate-400 leading-tight">
               Analyze Your Resume with <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-400">AI Precision</span>
             </h1>
             

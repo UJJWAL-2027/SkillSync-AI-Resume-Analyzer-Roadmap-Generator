@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 
 // Subcomponents
+import MobileNav from "@/components/MobileNav";
 import DetectedSkills from "@/components/skill-analysis/DetectedSkills";
 import MissingSkills from "@/components/skill-analysis/MissingSkills";
 import CoverageSection from "@/components/skill-analysis/CoverageSection";
@@ -52,13 +53,15 @@ export default function SkillAnalysisPage() {
 
       {/* Sticky Header */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-[#0B1120]/80 backdrop-blur-xl border-b border-white/10 shadow-[0_4px_30px_rgba(0,0,0,0.3)]">
-        <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2 group">
             <span className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-purple-500 flex items-center justify-center shadow-[0_0_15px_rgba(99,102,241,0.5)] group-hover:shadow-[0_0_25px_rgba(99,102,241,0.6)] transition-all duration-300">
               <span className="text-white font-bold text-sm tracking-wide">SS</span>
             </span>
             <span className="text-slate-100 font-semibold text-lg tracking-tight">SkillSync</span>
           </Link>
+
+          <MobileNav />
 
           {/* Progress Navigation */}
           <nav className="hidden md:flex items-center gap-3 text-sm font-medium">
@@ -79,7 +82,7 @@ export default function SkillAnalysisPage() {
       </header>
 
       {/* Main Content */}
-      <main className="relative z-10 w-full max-w-7xl mx-auto px-6 pt-32 flex flex-col gap-12">
+      <main className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 pt-32 flex flex-col gap-12">
         {/* Sections 1 & 2: Detected vs Missing Skills Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
           <motion.div

@@ -45,7 +45,7 @@ exports.uploadResume = async (req, res) => {
     if (!rawText || rawText.trim().length === 0) {
       return res.status(400).json({
         success: false,
-        message: "Could not extract text from resume",
+        message: "This file does not appear to be a valid resume. Please upload a resume PDF containing readable text.",
       });
     }
 

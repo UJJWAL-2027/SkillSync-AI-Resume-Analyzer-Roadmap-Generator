@@ -86,7 +86,7 @@ export default function SkillBreakdown({ analysis }) {
       </h3>
 
       <div className="p-6 bg-[#0F172A]/70 backdrop-blur-xl border border-white/10 rounded-[2rem] shadow-[0_0_40px_rgba(99,102,241,0.02)]">
-        <div className="w-full h-[320px] md:h-[360px]">
+        <div className="w-full h-[280px] md:h-[360px]">
           <ResponsiveContainer width="100%" height="100%">
             <BarChart
               data={data}
@@ -109,7 +109,10 @@ export default function SkillBreakdown({ analysis }) {
                 dataKey="name"
                 axisLine={false}
                 tickLine={false}
-                tick={{ fill: "#94A3B8", fontSize: 12, fontWeight: 500 }}
+                tick={{ fill: "#94A3B8", fontSize: 11, fontWeight: 500 }}
+                angle={-45}
+                textAnchor="end"
+                height={60}
               />
               <YAxis
                 domain={[0, 100]}

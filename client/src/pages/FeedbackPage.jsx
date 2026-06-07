@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import api from "@/services/api";
 
 // Subcomponents
+import MobileNav from "@/components/MobileNav";
 import PriorityImprovements from "@/components/feedback/PriorityImprovements";
 import KeywordAnalysis from "@/components/feedback/KeywordAnalysis";
 import ATSChecklist from "@/components/feedback/ATSChecklist";
@@ -329,8 +329,6 @@ export default function FeedbackPage() {
   const navigate = useNavigate();
   const [analysisData, setAnalysisData] = useState(null);
   const [isChecking, setIsChecking] = useState(true);
-  const [isUploading, setIsUploading] = useState(false);
-  const [uploadError, setUploadError] = useState("");
 
   useEffect(() => {
     const stored = localStorage.getItem("analysisResult");
@@ -349,33 +347,6 @@ export default function FeedbackPage() {
     setIsChecking(false);
   }, [navigate]);
 
-  const handleImprovedResumeUpload = async (file) => {
-    if (!file || !analysisData?.role) return;
-
-    setIsUploading(true);
-    setUploadError("");
-
-    const formData = new FormData();
-    formData.append("resume", file);
-    formData.append("role", analysisData.role);
-
-    try {
-      const response = await api.post("/resume/upload", formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
-
-      const newData = response.data.data;
-      // Store in localStorage so all pages (Dashboard, Skill Analysis, Roadmap) are recalculated instantly
-      localStorage.setItem("analysisResult", JSON.stringify(newData));
-      // Update local state to dynamically refresh the Feedback page
-      setAnalysisData(computeMissingFeedbackData(newData));
-    } catch (err) {
-      console.error("Failed to upload improved resume:", err);
-      setUploadError(err.message || "Failed to analyze improved resume.");
-    } finally {
-      setIsUploading(false);
-    }
-  };
 
   if (isChecking || !analysisData) {
     return (
@@ -408,13 +379,15 @@ export default function FeedbackPage() {
 
       {/* Sticky Header */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-[#0B1120]/80 backdrop-blur-xl border-b border-white/10 shadow-[0_4px_30px_rgba(0,0,0,0.3)]">
-        <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2 group">
             <span className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-purple-500 flex items-center justify-center shadow-[0_0_15px_rgba(99,102,241,0.5)] group-hover:shadow-[0_0_25px_rgba(99,102,241,0.6)] transition-all duration-300">
               <span className="text-white font-bold text-sm tracking-wide">SS</span>
             </span>
             <span className="text-slate-100 font-semibold text-lg tracking-tight">SkillSync</span>
           </Link>
+
+          <MobileNav />
 
           {/* Progress Navigation */}
           <nav className="hidden md:flex items-center gap-3 text-sm font-medium">
@@ -439,7 +412,7 @@ export default function FeedbackPage() {
       </header>
 
       {/* Main Content */}
-      <main className="relative z-10 w-full max-w-7xl mx-auto px-6 pt-32 flex flex-col gap-12">
+      <main className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 pt-32 flex flex-col gap-12">
         
         {/* Page Title Section */}
         <motion.div
@@ -456,12 +429,7 @@ export default function FeedbackPage() {
           </p>
         </motion.div>
 
-        {/* Upload Error Banner */}
-        {uploadError && (
-          <div className="p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-sm">
-            ⚠️ {uploadError}
-          </div>
-        )}
+
 
         {/* Section 2: Priority Improvements */}
         <motion.div
@@ -540,7 +508,7 @@ export default function FeedbackPage() {
           viewport={{ once: true, margin: "-40px" }}
           transition={{ duration: 0.6 }}
         >
-          <FinalCTA onUpload={handleImprovedResumeUpload} isLoading={isUploading} />
+          <FinalCTA />
         </motion.div>
 
       </main>

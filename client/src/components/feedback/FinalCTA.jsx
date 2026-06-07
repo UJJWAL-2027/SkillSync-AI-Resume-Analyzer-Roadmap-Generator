@@ -1,21 +1,13 @@
-import React, { useRef } from "react";
-import { Link } from "react-router-dom";
-import { ArrowLeft, Upload, Map } from "lucide-react";
+import React from "react";
+import { Link, useNavigate } from "react-router-dom";
 
-export default function FinalCTA({ onUpload, isLoading = false }) {
-  const fileInputRef = useRef(null);
+export default function FinalCTA() {
+  const navigate = useNavigate();
 
-  const handleButtonClick = () => {
-    if (fileInputRef.current) {
-      fileInputRef.current.click();
-    }
-  };
-
-  const handleFileChange = (e) => {
-    const file = e.target.files?.[0];
-    if (file && onUpload) {
-      onUpload(file);
-    }
+  const handleStartFresh = () => {
+    // Clear all previous analysis state so Upload Page starts completely fresh
+    localStorage.removeItem("analysisResult");
+    navigate("/upload");
   };
 
   return (
@@ -41,24 +33,14 @@ export default function FinalCTA({ onUpload, isLoading = false }) {
           Back to Roadmap
         </Link>
 
-        {/* Upload Improved Resume Button */}
+        {/* Upload Improved Resume — navigates to Upload Page with fresh state */}
         <button
-          onClick={handleButtonClick}
-          disabled={isLoading}
-          className="flex items-center gap-2 px-6 h-12 rounded-xl bg-purple-600 hover:bg-purple-500 disabled:opacity-50 text-white transition-all duration-300 font-semibold shadow-[0_0_20px_rgba(168,85,247,0.3)] hover:scale-[1.02] active:scale-[0.98]"
+          onClick={handleStartFresh}
+          className="flex items-center gap-2 px-6 h-12 rounded-xl bg-purple-600 hover:bg-purple-500 text-white transition-all duration-300 font-semibold shadow-[0_0_20px_rgba(168,85,247,0.3)] hover:scale-[1.02] active:scale-[0.98]"
         >
           <span className="text-sm">📄</span>
-          {isLoading ? "Analyzing..." : "Upload Improved Resume"}
+          Upload Improved Resume
         </button>
-
-        {/* Hidden File Input */}
-        <input
-          type="file"
-          ref={fileInputRef}
-          onChange={handleFileChange}
-          accept=".pdf"
-          className="hidden"
-        />
       </div>
     </div>
   );
