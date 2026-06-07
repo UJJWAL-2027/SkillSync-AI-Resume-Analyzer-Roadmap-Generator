@@ -110,74 +110,138 @@ exports.uploadResume = async (req, res) => {
       { check: "Consistent date formatting", passed: true } // Assumed true for visual completeness if text parses
     ];
 
+    // ✅ Dynamic Action Item Generators
+    const getTechActionItems = () => {
+      let items = [];
+      if (analysis.missingSkills.length > 0) {
+          items.push(`Add missing skills like ${analysis.missingSkills.slice(0, 3).join(", ")} which are highly sought after for ${role} positions.`);
+      }
+      if (skills.length > 0) {
+          items.push(`You currently list ${skills.slice(0, 2).join(", ")}. Consider adding your proficiency level (e.g., Expert, Intermediate) for these to give recruiters clarity.`);
+      }
+      items.push(`Reorganize your skills section to prioritize ${role}-specific technologies over generic tools.`);
+      return items;
+    };
+
+    const getProjectActionItems = () => {
+      let items = [];
+      items.push(`Restructure your project bullet points to highlight your specific impact on the ${role} components.`);
+      if (skills.length > 0) {
+          const randomSkill = skills[Math.floor(Math.random() * skills.length)];
+          items.push(`Explicitly mention where you applied ${randomSkill} in your recent projects to prove practical experience.`);
+      }
+      items.push(`Add quantifiable results (e.g., 'Improved performance by 40%') to demonstrate measurable impact to potential employers.`);
+      return items;
+    };
+
+    const getFormattingActionItems = () => {
+      let items = [];
+      if (!hasExperienceHeader && !hasEducationHeader) {
+          items.push(`Clearly define your 'Experience' and 'Education' sections with standard headers so ATS systems can parse them accurately.`);
+      } else {
+          items.push(`Ensure consistent bullet point formatting, margins, and spacing across all your core sections.`);
+      }
+      items.push(`Use standard, ATS-friendly fonts (Arial, Calibri) to prevent automated rejection from tracking software.`);
+      if (!hasLinkedIn) {
+          items.push(`Add a clickable LinkedIn profile URL to your contact header to provide a comprehensive professional view.`);
+      }
+      return items;
+    };
+
+    const getSummaryActionItems = () => {
+      let items = [];
+      items.push(`Tailor your opening summary to explicitly target the ${role} position and align with career goals.`);
+      if (skills.length >= 2) {
+          items.push(`Highlight your core expertise in ${skills[0]} and ${skills[1]} right in the very first sentence.`);
+      } else {
+          items.push(`Mention your primary technical strengths and biggest achievement immediately in the summary.`);
+      }
+      items.push(`Keep the summary concise (2-3 sentences) and focus entirely on your unique value proposition.`);
+      return items;
+    };
+
+    const getKeywordActionItems = () => {
+      let items = [];
+      items.push(`Research 10-15 keywords from recent ${role} job postings and integrate them naturally throughout your bullet points.`);
+      if (analysis.missingSkills.length > 0) {
+          items.push(`Focus heavily on incorporating missing critical terms like ${analysis.missingSkills[0]} into your work experience descriptions.`);
+      }
+      items.push(`Ensure variations of the ${role} title are mentioned, such as full titles or common industry acronyms.`);
+      return items;
+    };
+
+    // ✅ Pre-compute ATS failure count (needed by priority resolver)
+    const failedAtsChecks = atsChecklist.filter(item => !item.passed).length;
+
+    // ✅ Dynamic Priority Resolver
+    // Uses a composite of match score, missing skill count, and ATS failures
+    // to determine the most accurate priority tier for each improvement card.
+    const resolvePriority = ({ missingWeight = 0, scoreWeight = 0, atsWeight = 0 }) => {
+      // Normalize each signal to 0–100 scale
+      const missingSignal = Math.min((analysis.missingSkills.length / 5) * 100, 100); // max 5 missing
+      const scoreSignal = 100 - analysis.score; // lower score = higher urgency
+      const atsSignal = Math.min((failedAtsChecks / 5) * 100, 100); // max 5 ats fails
+
+      const composite =
+        (missingSignal * missingWeight + scoreSignal * scoreWeight + atsSignal * atsWeight) /
+        (missingWeight + scoreWeight + atsWeight || 1);
+
+      if (composite >= 60) return "High Priority";
+      if (composite >= 30) return "Medium Priority";
+      return "Low Priority";
+    };
+
     // ✅ Generate Priority Improvements
     const priorityImprovements = [];
-    
-    if (!hasExperienceHeader && !hasProjectsHeader) {
-      priorityImprovements.push({
-        title: "Add Experience or Projects Section",
-        description: "Your resume lacks structured experience or project sections. Recruiters need to see applied knowledge.",
-        priority: "High Priority",
-        actionItems: [
-          "Create a dedicated 'Experience' or 'Projects' section",
-          "Include 2-3 detailed bullet points per entry",
-          "Highlight quantifiable achievements"
-        ]
-      });
-    }
 
+    // 1. Strengthen Technical Skills Section — driven mainly by missing skills count
     if (analysis.missingSkills.length > 0) {
       priorityImprovements.push({
         title: "Strengthen Technical Skills Section",
         description: `Your resume is missing key technical skills required for a ${role} role. Recruiters want to see proficiency levels and related skills.`,
-        priority: "High Priority",
-        actionItems: [
-          `Add missing skills: ${analysis.missingSkills.slice(0, 3).join(", ")}`,
-          "Add proficiency levels (Expert, Advanced, Intermediate)",
-          "Group related technologies together",
-          "Prioritize most relevant skills for your target role"
-        ]
+        priority: resolvePriority({ missingWeight: 0.7, scoreWeight: 0.3, atsWeight: 0 }),
+        actionItems: getTechActionItems()
       });
     }
 
-    if (!hasLinkedIn) {
+    // 2. Optimize Project Descriptions — driven mainly by overall match score
+    if (analysis.score < 80) {
       priorityImprovements.push({
-        title: "Add LinkedIn Profile",
-        description: "A LinkedIn profile provides a comprehensive view of your professional network and endorsements.",
-        priority: "Medium Priority",
-        actionItems: [
-          "Include a clickable LinkedIn URL in the contact header",
-          "Ensure your LinkedIn profile matches your resume content"
-        ]
+        title: "Optimize Project Descriptions",
+        description: "Current project descriptions might be too generic. Add metrics, technologies used, and impact statements.",
+        priority: resolvePriority({ missingWeight: 0.2, scoreWeight: 0.8, atsWeight: 0 }),
+        actionItems: getProjectActionItems()
       });
     }
 
-    if (analysis.score < 60) {
-        priorityImprovements.push({
-            title: "Optimize Project Descriptions",
-            description: "Current project descriptions might be too generic. Add metrics, technologies used, and impact statements.",
-            priority: "Medium Priority",
-            actionItems: [
-                "Restructure as: Project Name | Role | Impact | Tech Stack",
-                "Add quantifiable results (e.g., 'Improved performance by 40%')",
-                "Include 3-5 bullet points per project",
-                "Highlight your specific contribution"
-            ]
-        });
+    // 3. Improve Resume Formatting — driven mainly by ATS failures
+    if (failedAtsChecks > 0 || !hasExperienceHeader || !hasEducationHeader) {
+      priorityImprovements.push({
+        title: "Improve Resume Formatting",
+        description: "Consider updating the visual hierarchy and spacing to make it more ATS-friendly.",
+        priority: resolvePriority({ missingWeight: 0, scoreWeight: 0.2, atsWeight: 0.8 }),
+        actionItems: getFormattingActionItems()
+      });
     }
 
-    if (priorityImprovements.length === 0 || analysis.score >= 80) {
-        priorityImprovements.push({
-            title: "Enhance Summary Statement",
-            description: "Your professional summary could better highlight your unique value proposition.",
-            priority: "Low Priority",
-            actionItems: [
-                "Lead with your biggest achievement or value proposition",
-                "Mention target role and career goals",
-                "Include 2-3 key accomplishments",
-                "Keep it to 2-3 sentences maximum"
-            ]
-        });
+    // 4. Enhance Summary Statement — balanced across all signals
+    if (analysis.score < 90) {
+      priorityImprovements.push({
+        title: "Enhance Summary Statement",
+        description: "Your professional summary could better highlight your unique value proposition.",
+        priority: resolvePriority({ missingWeight: 0.3, scoreWeight: 0.5, atsWeight: 0.2 }),
+        actionItems: getSummaryActionItems()
+      });
+    }
+
+    // 5. Add More Keywords — driven by missing skills + score gap
+    if (analysis.missingSkills.length > 0 || analysis.score < 70) {
+      priorityImprovements.push({
+        title: "Add More Keywords",
+        description: "Include industry-specific keywords to improve ATS matching with job descriptions.",
+        priority: resolvePriority({ missingWeight: 0.5, scoreWeight: 0.5, atsWeight: 0 }),
+        actionItems: getKeywordActionItems()
+      });
     }
 
     // ✅ Generate Keyword Analysis
