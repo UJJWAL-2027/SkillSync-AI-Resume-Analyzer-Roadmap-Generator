@@ -8,9 +8,11 @@ Built using the MERN stack with AI-powered resume parsing and roadmap generation
 
 ## Live Demo
 
-Frontend: [skillsync-ai.vercel.app](https://skillsync-ai.vercel.app)
+
+Frontend: [skill-sync-ai-resume-analyzer-roadm.vercel.app](https://skill-sync-ai-resume-analyzer-roadm.vercel.app/)
 
 Backend: [skillsync-backend-0y7b.onrender.com](https://skillsync-backend-0y7b.onrender.com)
+
 ---
 
 ## Features
