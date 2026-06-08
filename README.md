@@ -15,6 +15,55 @@ Backend: [skillsync-backend-0y7b.onrender.com](https://skillsync-backend-0y7b.on
 
 ---
 
+# Screenshots
+
+## Landing Page
+
+### Hero Section
+
+![Landing Page](./screenshots/landing-hero.png)
+
+### Features
+
+![Features](./screenshots/features.png)
+
+### Readiness Preview
+
+![Readiness](./screenshots/readiness-preview.png)
+
+---
+
+## Resume Upload
+
+![Upload](./screenshots/upload-page.png)
+
+---
+
+## Dashboard
+
+### Resume Analysis Dashboard
+
+![Dashboard](./screenshots/dashboard.png)
+
+### Skill Breakdown
+
+![Skill Breakdown](./screenshots/skill-breakdown.png)
+
+---
+
+## Skill Analysis
+
+### Detected & Missing Skills
+
+![Skill Analysis](./screenshots/skill-analysis.png)
+
+### Gap Analysis
+
+![Gap Analysis](./screenshots/gap-analysis.png)
+
+---
+
+
 ## Features
 
 ### Resume Analysis
@@ -96,54 +145,6 @@ Readiness Score Calculation
 Roadmap Generation
 ↓
 Feedback & Recommendations
-
----
-
-# Screenshots
-
-## Landing Page
-
-### Hero Section
-
-![Landing Page](./screenshots/landing-hero.png)
-
-### Features
-
-![Features](./screenshots/features.png)
-
-### Readiness Preview
-
-![Readiness](./screenshots/readiness-preview.png)
-
----
-
-## Resume Upload
-
-![Upload](./screenshots/upload-page.png)
-
----
-
-## Dashboard
-
-### Resume Analysis Dashboard
-
-![Dashboard](./screenshots/dashboard.png)
-
-### Skill Breakdown
-
-![Skill Breakdown](./screenshots/skill-breakdown.png)
-
----
-
-## Skill Analysis
-
-### Detected & Missing Skills
-
-![Skill Analysis](./screenshots/skill-analysis.png)
-
-### Gap Analysis
-
-![Gap Analysis](./screenshots/gap-analysis.png)
 
 ---
 
