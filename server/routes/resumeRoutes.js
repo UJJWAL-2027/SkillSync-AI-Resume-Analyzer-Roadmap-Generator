@@ -4,7 +4,9 @@ const upload = require("../config/multer");
 const { uploadResume } = require("../controllers/resumeController");
 
 // POST /api/resume/upload
+console.log("Registering POST /upload in resumeRoutes.js...");
 router.post("/upload", upload.single("resume"), uploadResume);
+console.log("Registered POST /upload");
 
 // GET /api/resume/health (diagnostic route)
 router.get("/health", (req, res) => res.json({ status: "ok" }));

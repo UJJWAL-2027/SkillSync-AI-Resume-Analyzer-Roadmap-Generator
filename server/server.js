@@ -8,7 +8,10 @@ const app = express();
 // Middleware
 app.use(cors());
 app.use(express.json());
+
+console.log("Loading routes/index.js...");
 app.use("/api", routes);
+console.log("Mounted /api routes in server.js");
 
 // Test route
 app.get("/", (req, res) => {
